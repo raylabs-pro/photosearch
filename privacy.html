@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PhotoSearch — Privacy Policy</title>
+<meta name="description" content="PhotoSearch privacy policy: no data collected. All photo analysis happens on your Mac.">
+<style>
+  :root {
+    --indigo: #3d2185;
+    --violet: #6b339e;
+    --teal: #178fa8;
+    --ink: rgba(255, 255, 255, 0.92);
+    --ink-soft: rgba(255, 255, 255, 0.68);
+    --ink-faint: rgba(255, 255, 255, 0.38);
+    --accent: #8cd4e6;
+    --card: rgba(255, 255, 255, 0.055);
+    --card-line: rgba(255, 255, 255, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    color: var(--ink);
+    background:
+      radial-gradient(1200px 800px at 85% -10%, rgba(23, 143, 168, 0.35), transparent 60%),
+      radial-gradient(1000px 700px at -10% 110%, rgba(23, 143, 168, 0.28), transparent 55%),
+      linear-gradient(145deg, #241147 0%, var(--indigo) 34%, #4d2492 60%, #14606f 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 72px 28px 96px; }
+  .mark {
+    display: inline-flex; align-items: center; gap: 12px;
+    margin-bottom: 56px; text-decoration: none; color: var(--ink);
+  }
+  .lens {
+    width: 40px; height: 40px; border-radius: 11px; position: relative; flex: none;
+    background: linear-gradient(145deg, #3d2185, #6b339e 55%, #178fa8);
+    box-shadow: 0 6px 18px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.25);
+  }
+  .lens::before {
+    content: ""; position: absolute; left: 9px; top: 8px; width: 14px; height: 14px;
+    border: 3.5px solid #fff; border-radius: 50%;
+  }
+  .lens::after {
+    content: ""; position: absolute; left: 22px; top: 22px; width: 8px; height: 3.5px;
+    background: #fff; border-radius: 2px; transform: rotate(45deg);
+  }
+  .mark b { font-size: 19px; letter-spacing: -0.2px; font-weight: 700; }
+  h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    font-size: clamp(34px, 6vw, 48px); line-height: 1.08;
+    letter-spacing: -0.02em; font-weight: 700; margin-bottom: 10px;
+  }
+  .date { color: var(--ink-faint); font-size: 15px; margin-bottom: 44px; }
+  .headline {
+    font-size: 22px; font-weight: 650; color: var(--accent);
+    padding: 24px 26px; border-radius: 16px; margin-bottom: 44px;
+    background: var(--card); border: 1px solid var(--card-line);
+  }
+  h2 {
+    font-size: 20px; font-weight: 700; letter-spacing: -0.01em;
+    margin: 40px 0 12px;
+  }
+  p { font-size: 16px; color: var(--ink-soft); margin-bottom: 14px; }
+  ul { margin: 0 0 14px 22px; }
+  li { font-size: 16px; color: var(--ink-soft); margin-bottom: 8px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  footer {
+    margin-top: 72px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.1);
+    font-size: 13.5px; color: var(--ink-faint);
+    display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  footer a { color: var(--ink-faint); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="mark" href="./"><span class="lens" aria-hidden="true"></span><b>PhotoSearch</b></a>
+
+    <h1>Privacy Policy</h1>
+    <p class="date">Effective 12 August 2026 · PhotoSearch for Mac</p>
+
+    <p class="headline">PhotoSearch collects no data. Your photos, your
+    searches, and everything the app learns about your library stay on
+    your Mac.</p>
+
+    <h2>What the app does with your photos</h2>
+    <p>PhotoSearch analyzes the photos you give it access to — your Photos
+    library and any folders you add — so you can search them by
+    description. All of this analysis runs on your Mac, using machine
+    learning models that ship inside the app. The search index it builds
+    is stored on your Mac and never leaves it.</p>
+
+    <h2>What we collect</h2>
+    <p>Nothing. PhotoSearch has:</p>
+    <ul>
+      <li>no accounts and no sign-in,</li>
+      <li>no analytics, telemetry, or crash reporting of our own,</li>
+      <li>no advertising and no third-party SDKs,</li>
+      <li>no servers that ever receive your photos or searches.</li>
+    </ul>
+
+    <h2>The one network request worth knowing about</h2>
+    <p>To turn a photo's GPS coordinates into a searchable place name
+    ("rome", "beach"), the app uses Apple's built-in geocoding service,
+    which receives coordinates — never the photo, never anything that
+    identifies you to us. This lookup is handled by macOS under
+    <a href="https://www.apple.com/legal/privacy/">Apple's privacy
+    policy</a>. Search itself works offline.</p>
+
+    <h2>Purchases</h2>
+    <p>PhotoSearch is distributed through the Mac App Store. Payment and
+    receipt handling, if any, are performed by Apple; we receive no
+    personal information from it.</p>
+
+    <h2>Your data, your machine</h2>
+    <p>Because everything lives on your Mac, deleting the app's data is
+    entirely in your hands: remove a folder source in the app to drop its
+    index, or delete the app to remove everything it built. There is
+    nothing to request from us — we hold nothing.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If a future version of PhotoSearch ever changes what happens with
+    your data, this page will say so plainly before that version ships,
+    and the change will be noted in the App Store release notes.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about privacy:
+    <a href="mailto:rama@alsterlabs.com">rama@alsterlabs.com</a></p>
+
+    <footer>
+      <span>© 2026 Rama Naidu Lanka · PhotoSearch for Mac</span>
+      <a href="./">Support</a>
+    </footer>
+  </div>
+</body>
+</html>
