@@ -30,11 +30,19 @@
     -webkit-font-smoothing: antialiased;
     line-height: 1.6;
   }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 72px 28px 96px; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 16px 28px 96px; }
+  .hero-inner { max-width: 1080px; margin: 0 auto; padding: 64px 28px 8px; }
   .mark {
     display: inline-flex; align-items: center; gap: 12px;
-    margin-bottom: 56px; text-decoration: none; color: var(--ink);
+    margin-bottom: 48px; text-decoration: none; color: var(--ink);
   }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 52px; align-items: center;
+  }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  }
+  .hero-copy .terms { margin-bottom: 0; }
   .lens {
     width: 40px; height: 40px; border-radius: 11px; position: relative; flex: none;
     background: linear-gradient(145deg, #3d2185, #6b339e 55%, #178fa8);
@@ -99,24 +107,176 @@
     display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
   }
   footer a { color: var(--ink-faint); }
+  .hero-video {
+    width: 100%; border-radius: 18px; margin: 0;
+    box-shadow: 0 20px 48px rgba(6, 20, 40, 0.4);
+    border: 1px solid var(--card-line);
+    display: block;
+  }
+  .next-card {
+    background: var(--card); border: 1px solid var(--card-line);
+    border-radius: 16px; padding: 22px 24px; margin-bottom: 14px;
+    backdrop-filter: blur(6px);
+  }
+  .next-card h3 {
+    font-size: 17px; font-weight: 650; margin-bottom: 6px; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .next-card h3 .soon {
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent); font-weight: 700; border: 1px solid var(--card-line);
+    border-radius: 999px; padding: 3px 9px; background: rgba(140, 212, 230, 0.08);
+  }
+  .next-card p { font-size: 15.5px; color: var(--ink-soft); }
+  .features {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    margin: 8px 0 8px;
+  }
+  @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+  .feature {
+    background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
+    border: 1px solid var(--card-line); border-radius: 18px; padding: 22px 20px;
+  }
+  .feature .badge {
+    width: 38px; height: 38px; border-radius: 11px; margin-bottom: 14px;
+    display: flex; align-items: center; justify-content: center;
+    background: linear-gradient(150deg, rgba(140,212,230,.22), rgba(140,212,230,.06));
+    border: 1px solid rgba(140,212,230,.28);
+  }
+  .feature .badge svg { width: 19px; height: 19px; color: var(--accent); }
+  .feature h3 { font-size: 16.5px; font-weight: 650; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .feature p { font-size: 14.5px; color: var(--ink-soft); line-height: 1.5; }
+  .feature .eg {
+    display: inline-block; margin-top: 10px; font-size: 12.5px; color: var(--accent);
+    background: rgba(140,212,230,.08); border: 1px solid rgba(140,212,230,.2);
+    border-radius: 8px; padding: 4px 9px; font-family: ui-monospace, "SF Mono", monospace;
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="hero-inner">
     <a class="mark" href="./"><span class="lens" aria-hidden="true"></span><b>PhotoSearch</b></a>
 
-    <h1>Type the story.<br>Get the photo.</h1>
-    <p class="lede">PhotoSearch for Mac finds photos when you describe them —
-    "kid wearing crown blowing out candles", "wifi password", "red car".</p>
-    <p class="privacy-line">All your data stays on your Mac.</p>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1>Type the story.<br>Get the photo.</h1>
 
-    <a class="get" href="https://apps.apple.com/app/id6800058812">
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M16.5 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.8 2.3 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 1.9-1.1 2.6-2.2.8-1.2 1.2-2.5 1.2-2.5s-2.2-.9-2.2-3.8zM14.3 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"/>
-      </svg>
-      <span>Download on the Mac App Store<small>Free · macOS 14 or later · Apple silicon</small></span>
-    </a>
-    <p class="terms">Also available as a <a href="https://raylabs-photosearch-dist.s3.eu-west-3.amazonaws.com/PhotoSearch-1.0.0.dmg">direct download</a> for Macs outside the App Store.</p>
+        <p class="lede">PhotoSearch for Mac finds photos when you describe them —
+        "kid wearing crown blowing out candles", "wifi password", "red car".</p>
+        <p class="privacy-line">All your data stays on your Mac.</p>
+
+        <a class="get" href="https://apps.apple.com/app/id6800058812">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M16.5 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.8 2.3 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 1.9-1.1 2.6-2.2.8-1.2 1.2-2.5 1.2-2.5s-2.2-.9-2.2-3.8zM14.3 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"/>
+          </svg>
+          <span>Download on the Mac App Store<small>Free · macOS 14 or later · Apple silicon</small></span>
+        </a>
+        <p class="terms">Also available as a <a href="https://raylabs-photosearch-dist.s3.eu-west-3.amazonaws.com/PhotoSearch-1.0.0.dmg">direct download</a> for Macs outside the App Store.</p>
+      </div>
+
+      <div class="hero-visual">
+        <video class="hero-video" autoplay muted loop playsinline preload="metadata">
+          <source src="hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <h2>What it does</h2>
+
+    <div class="features">
+      <div class="feature">
+        <span class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </span>
+        <h3>Describe it, find it</h3>
+        <p>Type a whole sentence, not just keywords. PhotoSearch understands
+        the sentence — not only the nouns in it.</p>
+        <span class="eg">"kid in the red shirt blowing out candles"</span>
+      </div>
+
+      <div class="feature">
+        <span class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 7V5a1 1 0 0 1 1-1h3M4 17v2a1 1 0 0 0 1 1h3M20 7V5a1 1 0 0 0-1-1h-3M20 17v2a1 1 0 0 1-1 1h-3M9 9h6M9 12h6M9 15h4"/>
+          </svg>
+        </span>
+        <h3>Reads the words in your photos</h3>
+        <p>Receipts, wifi cards, signs, menus, whiteboards — if there's
+        text in the picture, you can search for it.</p>
+        <span class="eg">"wifi password"</span>
+      </div>
+
+      <div class="feature">
+        <span class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none" opacity=".35"/>
+          </svg>
+        </span>
+        <h3>Objects and colors, together</h3>
+        <p>The two are understood as one idea, not matched separately —
+        so a search for a color means the right thing.</p>
+        <span class="eg">"red car"</span>
+      </div>
+
+      <div class="feature">
+        <span class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          </svg>
+        </span>
+        <h3>Any folder, not just Photos</h3>
+        <p>Index design references, exports, an archive drive — anywhere
+        on disk, indexed and searched the same way.</p>
+        <span class="eg">the "+" chip under search</span>
+      </div>
+    </div>
+
+    <h2>Private, and honest about it</h2>
+
+    <div class="card">
+      <h3>The models live in the app</h3>
+      <p>The AI that reads your photos — object detection, text recognition,
+      image understanding — ships inside the app itself, about 140 MB.
+      Nothing is downloaded from a server to search your library.</p>
+    </div>
+
+    <div class="card">
+      <h3>Your photos and your searches never leave your Mac</h3>
+      <p>Every index, every query, every result is computed locally on
+      your Mac's Neural Engine. There's no account, no upload, no cloud
+      service standing between you and your own library — search works
+      the same with Wi-Fi off.</p>
+    </div>
+
+    <div class="card">
+      <h3>The one exception, stated plainly</h3>
+      <p>If a photo carries GPS coordinates, turning them into a place
+      name ("Rome", "Hamburg") uses Apple's own system geocoder —
+      coordinates only, never a photo, handled by macOS itself, not by
+      us. Search still works fully offline; only that one place-name
+      lookup needs a connection. We'd rather name the one exception than
+      round up to "100% local."</p>
+    </div>
+
+    <h2>What's next</h2>
+
+    <div class="next-card">
+      <h3>Search by who's in the photo <span class="soon">Exploring</span></h3>
+      <p>Find "the kids together" or "Mom and Dad at the lake" the same
+      way you already search by scene and object — on-device, same as
+      everything else.</p>
+    </div>
+
+    <div class="next-card">
+      <h3>Beyond photos <span class="soon">Exploring</span></h3>
+      <p>The same on-device search that reads your photos is a natural
+      fit for PDFs and documents too. Early direction, not a promised
+      date — we'd rather ship it right than ship it on time.</p>
+    </div>
 
     <h2>Frequently asked</h2>
 
