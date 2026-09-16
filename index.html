@@ -30,19 +30,21 @@
     -webkit-font-smoothing: antialiased;
     line-height: 1.6;
   }
-  .wrap { max-width: 680px; margin: 0 auto; padding: 16px 28px 96px; }
-  .hero-inner { max-width: 1080px; margin: 0 auto; padding: 64px 28px 8px; }
+  .wrap { max-width: 1220px; margin: 0 auto; padding: 16px 28px 96px; }
+  .card-grid, .next-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 14px;
+    align-items: start;
+  }
+  .next-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid .card, .next-grid .next-card { margin-bottom: 0; }
+  @media (max-width: 860px) { .card-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .card-grid, .next-grid { grid-template-columns: 1fr; } }
+  .hero-inner { max-width: 1220px; margin: 0 auto; padding: 56px 28px 8px; }
   .mark {
     display: inline-flex; align-items: center; gap: 12px;
-    margin-bottom: 48px; text-decoration: none; color: var(--ink);
+    margin-bottom: 40px; text-decoration: none; color: var(--ink);
   }
-  .hero-grid {
-    display: grid; grid-template-columns: 1.05fr 1fr; gap: 52px; align-items: center;
-  }
-  @media (max-width: 860px) {
-    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
-  }
-  .hero-copy .terms { margin-bottom: 0; }
+  .hero-copy { max-width: 680px; margin-bottom: 36px; }
   .lens {
     width: 40px; height: 40px; border-radius: 11px; position: relative; flex: none;
     background: linear-gradient(145deg, #3d2185, #6b339e 55%, #178fa8);
@@ -113,6 +115,37 @@
     border: 1px solid var(--card-line);
     display: block;
   }
+  .hero-visual {
+    position: relative; cursor: zoom-in;
+  }
+  .hero-visual .expand-hint {
+    position: absolute; right: 14px; bottom: 14px;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(20, 16, 40, 0.72); backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,.18); border-radius: 999px;
+    padding: 7px 13px 7px 11px; font-size: 12.5px; font-weight: 600;
+    color: var(--ink); opacity: 0; transform: translateY(4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+  }
+  .hero-visual .expand-hint svg { width: 14px; height: 14px; }
+  .hero-visual:hover .expand-hint { opacity: 1; transform: translateY(0); }
+  .lightbox {
+    position: fixed; inset: 0; z-index: 50;
+    background: rgba(10, 6, 24, 0.86); backdrop-filter: blur(10px);
+    display: none; align-items: center; justify-content: center; padding: 5vh 5vw;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox video {
+    width: 100%; max-width: 1400px; max-height: 90vh; border-radius: 14px;
+    box-shadow: 0 30px 90px rgba(0,0,0,.6);
+  }
+  .lightbox-close {
+    position: absolute; top: 24px; right: 28px;
+    width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.08); color: var(--ink); font-size: 20px; line-height: 1;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,.16); }
   .next-card {
     background: var(--card); border: 1px solid var(--card-line);
     border-radius: 16px; padding: 22px 24px; margin-bottom: 14px;
@@ -129,10 +162,16 @@
   }
   .next-card p { font-size: 15.5px; color: var(--ink-soft); }
   .features {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
     margin: 8px 0 8px;
   }
-  @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
+  @media (max-width: 860px) { .features { grid-template-columns: 1fr 1fr; } }
+  .features .feature:last-child { grid-column: 1 / -1; }
+  .features .feature:last-child .eg { font-weight: 600; }
+  @media (max-width: 560px) {
+    .features { grid-template-columns: 1fr; }
+    .features .feature:last-child { grid-column: 1; }
+  }
   .feature {
     background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
     border: 1px solid var(--card-line); border-radius: 18px; padding: 22px 20px;
@@ -157,30 +196,59 @@
   <div class="hero-inner">
     <a class="mark" href="./"><span class="lens" aria-hidden="true"></span><b>PhotoSearch</b></a>
 
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <h1>Type the story.<br>Get the photo.</h1>
+    <div class="hero-copy">
+      <h1>Type the story.<br>Get the photo.</h1>
 
-        <p class="lede">PhotoSearch for Mac finds photos when you describe them —
-        "kid wearing crown blowing out candles", "wifi password", "red car".</p>
-        <p class="privacy-line">All your data stays on your Mac.</p>
+      <p class="lede">Not filenames, not tags you have to add — describe what
+      you half-remember: the receipt from a work trip, the parking level, the
+      video of the dog at the beach. It's the Google Photos search
+      experience — local, and free.</p>
+      <p class="privacy-line">Turn off Wi-Fi. It still works.</p>
 
-        <a class="get" href="https://apps.apple.com/app/id6800058812">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M16.5 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.8 2.3 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 1.9-1.1 2.6-2.2.8-1.2 1.2-2.5 1.2-2.5s-2.2-.9-2.2-3.8zM14.3 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"/>
-          </svg>
-          <span>Download on the Mac App Store<small>Free · macOS 14 or later · Apple silicon</small></span>
-        </a>
-        <p class="terms">Also available as a <a href="https://raylabs-photosearch-dist.s3.eu-west-3.amazonaws.com/PhotoSearch-1.0.0.dmg">direct download</a> for Macs outside the App Store.</p>
-      </div>
+      <a class="get" href="https://apps.apple.com/app/id6800058812">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M16.5 12.6c0-2.2 1.8-3.3 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8-1.5 0-2.9.9-3.7 2.2-1.6 2.7-.4 6.8 1.1 9 .7 1.1 1.6 2.3 2.8 2.3 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 1.9-1.1 2.6-2.2.8-1.2 1.2-2.5 1.2-2.5s-2.2-.9-2.2-3.8zM14.3 5.9c.6-.7 1-1.7.9-2.7-.9 0-2 .6-2.6 1.3-.6.6-1.1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2z"/>
+        </svg>
+        <span>Download on the Mac App Store<small>Free · macOS 14 or later · Apple silicon</small></span>
+      </a>
+      <p class="terms">Also available as a <a href="https://raylabs-photosearch-dist.s3.eu-west-3.amazonaws.com/PhotoSearch-1.0.0.dmg">direct download</a> for Macs outside the App Store.</p>
+    </div>
 
-      <div class="hero-visual">
+    <div class="hero-visual" onclick="openLightbox()" role="button" tabindex="0"
+           onkeydown="if(event.key==='Enter')openLightbox()" aria-label="Play the full demo, larger">
         <video class="hero-video" autoplay muted loop playsinline preload="metadata">
           <source src="hero-loop.mp4" type="video/mp4">
         </video>
-      </div>
+        <span class="expand-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/>
+          </svg>
+          See it larger
+        </span>
     </div>
   </div>
+
+  <div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <video id="lightbox-video" autoplay muted loop playsinline controls>
+      <source src="hero-full.mov" type="video/mp4">
+    </video>
+  </div>
+  <script>
+    function openLightbox() {
+      document.getElementById('lightbox').classList.add('open');
+      document.getElementById('lightbox-video').play();
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lightbox-video').pause();
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 
   <div class="wrap">
     <h2>What it does</h2>
@@ -233,99 +301,121 @@
         on disk, indexed and searched the same way.</p>
         <span class="eg">the "+" chip under search</span>
       </div>
+
+      <div class="feature">
+        <span class="badge" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>
+          </svg>
+        </span>
+        <h3>Tells you when nothing matches</h3>
+        <p>Most search would rather show you something than admit it found
+        nothing. We measured "god" against a real library at 0.4097 and
+        "dog" at 0.4235 — four hundredths apart, no threshold separates
+        them. So instead of a threshold, it checks for actual evidence:
+        no tag, no caption, no OCR word, no answer.</p>
+        <span class="eg">search "asdf" — you get nothing, not a guess</span>
+      </div>
     </div>
 
     <h2>Private, and honest about it</h2>
 
-    <div class="card">
-      <h3>The models live in the app</h3>
-      <p>The AI that reads your photos — object detection, text recognition,
-      image understanding — ships inside the app itself, about 140 MB.
-      Nothing is downloaded from a server to search your library.</p>
-    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>The models live in the app</h3>
+        <p>The AI that reads your photos — object detection, text recognition,
+        image understanding — ships inside the app itself, about 140 MB.
+        Nothing is downloaded from a server to search your library.</p>
+      </div>
 
-    <div class="card">
-      <h3>Your photos and your searches never leave your Mac</h3>
-      <p>Every index, every query, every result is computed locally on
-      your Mac's Neural Engine. There's no account, no upload, no cloud
-      service standing between you and your own library — search works
-      the same with Wi-Fi off.</p>
-    </div>
+      <div class="card">
+        <h3>Not sandboxed-and-still-phones-home. Actually can't.</h3>
+        <p>PhotoSearch ships with no network entitlement at all — not
+        unused, absent. A sandboxed Mac app without
+        <code>network.client</code> cannot open a socket; macOS enforces
+        that at the kernel, not us at our discretion. This isn't a policy
+        we're promising to keep. It's a permission we don't have.</p>
+      </div>
 
-    <div class="card">
-      <h3>The one exception, stated plainly</h3>
-      <p>If a photo carries GPS coordinates, turning them into a place
-      name ("Rome", "Hamburg") uses Apple's own system geocoder —
-      coordinates only, never a photo, handled by macOS itself, not by
-      us. Search still works fully offline; only that one place-name
-      lookup needs a connection. We'd rather name the one exception than
-      round up to "100% local."</p>
+      <div class="card">
+        <h3>The one exception, stated plainly</h3>
+        <p>If a photo carries GPS coordinates, turning them into a place
+        name ("Rome", "Hamburg") uses Apple's own system geocoder —
+        coordinates only, never a photo, handled by macOS itself, not by
+        us. Search still works fully offline; only that one place-name
+        lookup needs a connection. We'd rather name the one exception than
+        round up to "100% local."</p>
+      </div>
     </div>
 
     <h2>What's next</h2>
 
-    <div class="next-card">
-      <h3>Search by who's in the photo <span class="soon">Exploring</span></h3>
-      <p>Find "the kids together" or "Mom and Dad at the lake" the same
-      way you already search by scene and object — on-device, same as
-      everything else.</p>
-    </div>
+    <div class="next-grid">
+      <div class="next-card">
+        <h3>Search by who's in the photo <span class="soon">Exploring</span></h3>
+        <p>Find "the kids together" or "Mom and Dad at the lake" the same
+        way you already search by scene and object — on-device, same as
+        everything else.</p>
+      </div>
 
-    <div class="next-card">
-      <h3>Beyond photos <span class="soon">Exploring</span></h3>
-      <p>The same on-device search that reads your photos is a natural
-      fit for PDFs and documents too. Early direction, not a promised
-      date — we'd rather ship it right than ship it on time.</p>
+      <div class="next-card">
+        <h3>Beyond photos <span class="soon">Exploring</span></h3>
+        <p>The same on-device search that reads your photos is a natural
+        fit for PDFs and documents too. Early direction, not a promised
+        date — we'd rather ship it right than ship it on time.</p>
+      </div>
     </div>
 
     <h2>Frequently asked</h2>
 
-    <div class="card">
-      <h3>Will it run on my Mac?</h3>
-      <p>You need <b>macOS 14 Sonoma or later</b> on a Mac with <b>Apple
-      silicon</b> — an M1, M2, M3, M4 or later chip. Intel Macs are not
-      supported: the models that read your photos run on the Neural Engine,
-      which Intel Macs do not have.</p>
-      <p>Not sure which you have? Apple menu → About This Mac. If the Chip
-      line says "Apple M…" you are fine; if it says "Processor … Intel" the
-      app will not run.</p>
-      <p>It needs about 350 MB free — 140 MB for the app itself and room for
-      the search index it builds from your library.</p>
-    </div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Will it run on my Mac?</h3>
+        <p>You need <b>macOS 14 Sonoma or later</b> on a Mac with <b>Apple
+        silicon</b> — an M1, M2, M3, M4 or later chip. Intel Macs are not
+        supported: the models that read your photos run on the Neural Engine,
+        which Intel Macs do not have.</p>
+        <p>Not sure which you have? Apple menu → About This Mac. If the Chip
+        line says "Apple M…" you are fine; if it says "Processor … Intel" the
+        app will not run.</p>
+        <p>It needs about 350 MB free — 140 MB for the app itself and room for
+        the search index it builds from your library.</p>
+      </div>
 
-    <div class="card">
-      <h3>Why does PhotoSearch ask for photo library access?</h3>
-      <p>Search only works on photos the app can see. The library is scanned
-      on your Mac — the models that understand your photos ship inside the
-      app, and nothing about your photos is uploaded anywhere.</p>
-    </div>
+      <div class="card">
+        <h3>Why does PhotoSearch ask for photo library access?</h3>
+        <p>Search only works on photos the app can see. The library is scanned
+        on your Mac — the models that understand your photos ship inside the
+        app, and nothing about your photos is uploaded anywhere.</p>
+      </div>
 
-    <div class="card">
-      <h3>How long does the first index take?</h3>
-      <p>A 10,000-photo library becomes searchable in minutes on Apple
-      silicon. Your newest photos are indexed first, so search is useful
-      almost immediately; older photos follow in the background.</p>
-    </div>
+      <div class="card">
+        <h3>How long does the first index take?</h3>
+        <p>A 10,000-photo library becomes searchable in minutes on Apple
+        silicon. Your newest photos are indexed first, so search is useful
+        almost immediately; older photos follow in the background.</p>
+      </div>
 
-    <div class="card">
-      <h3>Can I search folders that aren't in my Photos library?</h3>
-      <p>Yes — click the + chip under the search field and pick any folder
-      (design references, exports, an archive drive). Folder photos are
-      indexed the same way and get their own filter chip.</p>
-    </div>
+      <div class="card">
+        <h3>Can I search folders that aren't in my Photos library?</h3>
+        <p>Yes — click the + chip under the search field and pick any folder
+        (design references, exports, an archive drive). Folder photos are
+        indexed the same way and get their own filter chip.</p>
+      </div>
 
-    <div class="card">
-      <h3>Search finds text inside photos?</h3>
-      <p>Yes. Words in your pictures are searchable: receipts, wifi cards,
-      signs, menus, whiteboards, QR codes and barcodes. Try typing a word
-      you remember seeing.</p>
-    </div>
+      <div class="card">
+        <h3>Search finds text inside photos?</h3>
+        <p>Yes. Words in your pictures are searchable: receipts, wifi cards,
+        signs, menus, whiteboards, QR codes and barcodes. Try typing a word
+        you remember seeing.</p>
+      </div>
 
-    <div class="card">
-      <h3>Something looks wrong — what should I try?</h3>
-      <p>Quit and reopen the app; indexing resumes where it left off. If a
-      specific search misbehaves, email a description of the query and what
-      you expected — that's genuinely useful feedback for tuning search.</p>
+      <div class="card">
+        <h3>Something looks wrong — what should I try?</h3>
+        <p>Quit and reopen the app; indexing resumes where it left off. If a
+        specific search misbehaves, email a description of the query and what
+        you expected — that's genuinely useful feedback for tuning search.</p>
+      </div>
     </div>
 
     <div class="contact">
