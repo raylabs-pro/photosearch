@@ -163,15 +163,10 @@
   .next-card p { font-size: 15.5px; color: var(--ink-soft); }
   .features {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-    margin: 8px 0 8px;
+    margin: 8px 0 8px; align-items: start;
   }
   @media (max-width: 860px) { .features { grid-template-columns: 1fr 1fr; } }
-  .features .feature:last-child { grid-column: 1 / -1; }
-  .features .feature:last-child .eg { font-weight: 600; }
-  @media (max-width: 560px) {
-    .features { grid-template-columns: 1fr; }
-    .features .feature:last-child { grid-column: 1; }
-  }
+  @media (max-width: 560px) { .features { grid-template-columns: 1fr; } }
   .feature {
     background: linear-gradient(160deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
     border: 1px solid var(--card-line); border-radius: 18px; padding: 22px 20px;
