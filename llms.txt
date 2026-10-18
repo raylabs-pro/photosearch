@@ -1,0 +1,22 @@
+# PhotoSearch: Describe & Find
+
+> PhotoSearch is a free Mac app that finds photos from a typed description ("red car", "the wifi card from the rental") and from the text printed inside them (receipts, signs, whiteboards, QR codes). Search runs on the Mac; photos are not uploaded and there is no account.
+
+## Facts
+
+- Platform: macOS 14 or later, Apple silicon only. No iPhone or iPad app.
+- Price: free on the Mac App Store, no in-app purchases.
+- Sources: the Photos library, plus any folder you add (screenshots, design references, exports, archive drives).
+- Search combines scene understanding, text recognition (OCR), objects with their colours ("red car" means a car that is red), places and dates ("rome last summer").
+- When nothing in the library supports a query, it returns no results instead of guessing.
+- Privacy: the recognition models ship inside the app, the app is sandboxed, and it has no network entitlement. Place names are resolved by macOS's own geocoder, the one part that involves Apple's servers (coordinates only, never photos). No analytics, no account. App Store privacy label: Data Not Collected.
+- Limits: photos only, video is not indexed. Apple silicon and macOS 14+ required. The first index of a large library takes minutes.
+- Publisher: Rama Naidu Lanka (independent developer).
+
+## Links
+
+- [Mac App Store listing](https://apps.apple.com/app/apple-store/id6800058812?pt=129227931&ct=llms&mt=12): download and current version
+- [Homepage, features and FAQ](https://raylabs-pro.github.io/photosearch/): what it does, which Macs it runs on, how long indexing takes
+- [Privacy policy](https://raylabs-pro.github.io/photosearch/privacy.html): what the app does and does not collect
+- [Demo video, 22 seconds](https://raylabs-pro.github.io/photosearch/hero-full.mov): typing a description and getting the photo
+- Support: photosearchappformac@gmail.com
